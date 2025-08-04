@@ -1,0 +1,187 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #1f0447;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hero-banner-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4em;
+  background-color: hsl(289, 81%, 96%);
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  flex: 1;
+  padding-right: 2em;
+  min-width: 250px;
+}
+
+.hero-text h2 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+.hero-text p {
+  font-size: 1.1em;
+  color: #444;
+}
+
+.hero-img {
+  flex: 1;
+  text-align: right;
+  min-width: 250px;
+}
+
+.hero-img img {
+  max-width: 100%;
+  border-radius: 12px;
+  height: auto;
+}
+
+header .logo {
+  font-size: 1.5em;
+}
+
+nav a {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.auth-container {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin: 100px auto;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-container input,
+.auth-container select,
+.auth-container textarea {
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 15px;
+}
+
+.auth-container button {
+  background-color: #7e57c2;
+  color: white;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.auth-container button:hover {
+  background-color: #5e35b1;
+}
+
+main {
+  padding: 20px 40px;
+}
+
+.event-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.event-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+.event-card button {
+  margin-top: 10px;
+  background: #7e57c2;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.event-details-container {
+  background: white;
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 700px;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+
+textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+.button {
+  background: #7e57c2;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.button.danger {
+  background-color: crimson;
+}
+.hero {
+  background: linear-gradient(to right, #6a1b9a, #8e24aa);
+  color: white;
+  text-align: center;
+  padding: 3rem 1rem;
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 2rem;
+}
+
+.nav-buttons a, .nav-buttons button {
+  margin-left: 10px;
+  background-color: #7b1fa2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.event-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}

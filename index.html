@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Evently - Home</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">🎉 Evently</div>
+    <div class="nav-buttons" id="authLinks"></div>
+    <input type="text" id="searchInput" placeholder="Search events..." />
+  </header>
+
+  <section class="hero-banner-split">
+    <div class="hero-text">
+    <h2>Welcome to Evently</h2>
+    <p>Host, Connect, Celebrate!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores vel sunt ducimus nulla delectus veniam tempora id, deleniti quo, et dolorum, ipsum vitae expedita sequi?</p>
+    </div>
+    <div  class="hero-img" >
+    <img src="hero.png" alt="" class="hero-image"/>
+    </div>
+  </section>
+
+  <main>
+    <h2>Upcoming Events</h2>
+    <div id="eventsList" class="event-grid"></div>
+  </main>
+
+  <script src="script/common.js"></script>
+  <script src="script/events.js"></script>
+</body>
+</html>

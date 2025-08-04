@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile | Evently</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">🎉 Evently</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#" id="logoutBtn">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="auth-container">
+      <h2>Welcome to your Profile</h2>
+      <p><strong>Username:</strong> <span id="username"></span></p>
+      <p><strong>Role:</strong> <span id="role"></span></p>
+
+      <h3>Your Events</h3>
+      <div id="dashboardEvents" class="event-grid"></div>
+    </div>
+  </main>
+
+  <script src="script/common.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      const events = JSON.parse(localStorage.getItem("events")) || [];
+      const registrations = JSON.parse(localStorage.getItem("registrations")) || [];
+
+      const usernameEl = document.getElementById("username");
+      const roleEl = document.getElementById("role");
+      const eventGrid = document.getElementById("dashboardEvents");
+
+      if (!currentUser) {
+        alert("Please login first.");
+        window.location.href = "login.html";
+        return;
+      }
+
+      usernameEl.textContent = currentUser.username;
+      roleEl.textContent = currentUser.role;
+
+      let userEvents = [];
+
+      if (currentUser.role === "organizer") {
+        userEvents = events.filter(e => e.createdBy === currentUser.username);
+      } else if (currentUser.role === "attendee") {
+        const regIds = registrations
+          .filter(r => r.username === currentUser.username)
+          .map(r => r.eventId);
+        userEvents = events.filter(e => regIds.includes(e.id));
+      }
+
+      if (userEvents.length === 0) {
+        eventGrid.innerHTML = "<p>No events found.</p>";
+        return;
+      }
+
+      userEvents.forEach(event => {
+        const card = document.createElement("div");
+        card.className = "event-card";
+        card.innerHTML = `
+          ${event.image ? `<img src="${event.image}" class="event-image" alt="Event Image">` : ""}
+          <h3>${event.title}</h3>
+          <p>${event.description.slice(0, 80)}...</p>
+          <p><strong>Date:</strong> ${new Date(event.date).toLocaleString()}</p>
+          <button onclick="viewEvent('${event.id}')">See More</button>
+        `;
+        eventGrid.appendChild(card);
+      });
+    });
+
+    function viewEvent(id) {
+      localStorage.setItem("currentEventId", id);
+      window.location.href = "event-details.html";
+    }
+  </script>
+</body>
+</html>

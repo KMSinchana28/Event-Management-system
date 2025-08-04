@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Event | Evently</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">🎉 Evently</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Profile</a>
+      <a href="#" id="logoutBtn">Logout</a>
+    </nav>
+  </header>
+
+  <div class="auth-container">
+    <h2>Create New Event</h2>
+    <form id="eventForm">
+      <input type="text" id="title" placeholder="Event Title" required />
+      <textarea id="description" placeholder="Event Description" required></textarea>
+      <input type="datetime-local" id="date" required />
+      <input type="file" id="image" accept="image/*" required />
+      <button type="submit">Create Event</button>
+    </form>
+  </div>
+
+  <script src="script/common.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser || currentUser.role !== "organizer") {
+        alert("Only organizers can create events.");
+        window.location.href = "index.html";
+      }
+
+      document.getElementById("eventForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const title = document.getElementById("title").value.trim();
+        const description = document.getElementById("description").value.trim();
+        const date = document.getElementById("date").value;
+        const imageInput = document.getElementById("image");
+
+        if (!title || !description || !date || !imageInput.files[0]) {
+          alert("Please fill all fields including an image.");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          const events = JSON.parse(localStorage.getItem("events")) || [];
+          const newEvent = {
+            id: `event-${Date.now()}`,
+            title,
+            description,
+            date,
+            image: reader.result,
+            createdBy: currentUser.username
+          };
+
+          events.push(newEvent);
+          localStorage.setItem("events", JSON.stringify(events));
+          alert("Event created successfully!");
+          window.location.href = "dashboard.html";
+        };
+
+        reader.readAsDataURL(imageInput.files[0]);
+      });
+    });
+  </script>
+</body>
+</html>

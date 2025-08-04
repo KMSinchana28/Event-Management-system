@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Update Event | Evently</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">🎉 Evently</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Profile</a>
+      <a href="#" id="logoutBtn">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="auth-container">
+      <h2>Update Event</h2>
+      <form id="editEventForm">
+        <input type="text" id="title" placeholder="Event Title" required />
+        <textarea id="description" placeholder="Event Description" required></textarea>
+        <input type="datetime-local" id="date" required />
+        <button type="submit">Update Event</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="script/common.js"></script>
+  <script>
+    const eventId = localStorage.getItem("currentEventId");
+    const events = JSON.parse(localStorage.getItem("events")) || [];
+    const event = events.find(e => e.id === eventId);
+
+    if (event) {
+      document.getElementById("title").value = event.title;
+      document.getElementById("description").value = event.description;
+      document.getElementById("date").value = event.date;
+    }
+
+    document.getElementById("editEventForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value.trim();
+      const description = document.getElementById("description").value.trim();
+      const date = document.getElementById("date").value;
+
+      const updatedEvents = events.map(e => {
+        if (e.id === eventId) {
+          return { ...e, title, description, date };
+        }
+        return e;
+      });
+
+      localStorage.setItem("events", JSON.stringify(updatedEvents));
+      alert("Event updated!");
+      window.location.href = "event-details.html";
+    });
+  </script>
+</body>
+</html>
